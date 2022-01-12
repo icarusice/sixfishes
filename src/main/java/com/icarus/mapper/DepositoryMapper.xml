@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icarus.mapper.DepositoryMapper">
+
+    <resultMap id="depositoryMap" type="com.icarus.entity.Depository">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="dname" property="dname" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="allColumns">
+    d.id,d.dname,d.address,d.introduce
+</sql>
+    <select id="findDepositoryAll" resultMap="depositoryMap">
+        select
+        <include refid="allColumns"/>
+        from depository d
+    </select>
+    <select id="findDepositoryNameById" resultType="string" parameterType="int">
+        select
+            d.dname
+        FROM depository d where d.id=#{id}
+    </select>
+</mapper>

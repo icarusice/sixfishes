@@ -1,0 +1,35 @@
+{
+  "homeInfo": {
+    "title": "模块",
+    "href": "/table_in"
+  },
+  "logoInfo": {
+    "title": "six fishes",
+    "image": "static/images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "模块",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "管理",
+          "icon": "fa fa-window-maximize",
+          "target": "_self",
+          "child": [
+            {
+              "title": "表单查询",
+              "href": "/table_in",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }]}
+          ]
+        }
+
+
+
+  ]
+}

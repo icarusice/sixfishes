@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icarus.mapper.UserMapper">
+    <!-- 字段映射 -->
+    <resultMap id="userMap" type="com.icarus.entity.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uname" property="uname" jdbcType="VARCHAR"/>
+        <result column="authority" property="authority" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="depository_id" property="depositoryId" jdbcType="INTEGER"/>
+        <result column="entry_date" property="entryDate" jdbcType="TIMESTAMP"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- 表查询字段 -->
+    <sql id="allColumns">
+        u.id, u.uname, u.authority, u.pwd, u.sex, u.depository_id, u.entry_date, u.email,
+        u.phone
+    </sql>
+    <insert id="insertUser" parameterType="map" >
+        INSERT iNTO user(
+            id, uname, authority, pwd, sex, depository_id, entry_date, email,
+            phone
+        )
+        values(
+                  #{id},
+                  #{uname},
+                  #{authority},
+                  #{pwd},
+                  #{sex},
+                  #{depositoryId},
+                  #{entryDate},
+                  #{email},
+                  #{phone}
+              )
+    </insert>
+    <select id="findUserByEmail" parameterType="string" resultMap="userMap">
+        select
+        <include refid="allColumns"/>
+        from user u where u.email like CONCAT('%',#{email},'%')
+    </select>
+    <select id="findUsersByCondition" resultMap="userMap" parameterType="map">
+        SELECT
+        <include refid="allColumns"/>
+        from user u where 1=1
+        <if test="uname!=null and uname!=''">
+            AND u.uname like concat('%',#{uname},'%')
+        </if>
+        <if test="authority!=null and authority!=''">
+            AND u.authority like concat('%',#{authority},'%')
+        </if>
+        <if test="pwd!=null and pwd!=''">
+            AND u.pwd like concat('%',#{pwd},'%')
+        </if>
+        <if test="sex!=null and sex!=''">
+            AND u.sex like concat('%',#{sex},'%')
+        </if>
+        <if test="depositoryId!=null">
+            AND u.depository_id = #{depositoryId}
+        </if>
+        <if test="entryDate !=null">
+            AND u.entry_date = #{entryDate}
+        </if>
+        <if test="email!=null and email!=''">
+            AND u.email like concat('%',#{email},'%')
+        </if>
+        <if test="phone!=null and phone!=''">
+            AND u.phone like concat('%',#{phone},'%')
+        </if>
+        <if test="begin!=null and size!=null">
+            LIMIT #{begin},#{size}
+        </if>
+    </select>
+    <!-- 根据id查询数据列表 -->
+    <select id="findUserNameById" resultType="string" parameterType="int">
+        SELECT
+            u.uname
+        FROM user u WHERE  u.id=#{id}
+    </select>
+</mapper>

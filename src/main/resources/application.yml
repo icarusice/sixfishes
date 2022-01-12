@@ -1,0 +1,50 @@
+#db:
+#  username: icarus
+#  pwd: 123
+server:
+  port: 82
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 316915568@qq.com
+    password: cchacgijljazbggj
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+            ##编码格式
+    default-encoding: utf-8
+  #  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: validate
+#  devtools:
+#    restart:
+#      enabled: true
+#      additional-paths: src/main/java
+#      exclude: templates
+#  freemarker:
+#    cache: false
+  thymeleaf:
+    cache: false
+    mode: HTML
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sixfishes?useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    view:
+      prefix: /templates/
+      suffix: .html
+    static-path-pattern: /static/**
+mybatis:
+  type-aliases-package: com.icarus.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-prefix: mapper.
